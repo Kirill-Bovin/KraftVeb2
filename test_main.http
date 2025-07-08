@@ -1,0 +1,9 @@
+POST http://127.0.0.1:5000/send_message
+Content-Type: application/json
+
+{
+  "name": "Иван",
+  "email": "ivan@example.com",
+  "phone": "+79112223344",
+  "message": "Хочу заказать сайт"
+}

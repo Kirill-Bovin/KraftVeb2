@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Craftveb.ru — Разработка сайтов</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #10b981 0%, #84cc16 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .platform-icon {
+            transition: all 0.3s ease;
+        }
+
+        .platform-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #10b981;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .animated-bg {
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/">
+                  <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Логотип" class="h-10 w-auto mr-3">
+                </a>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#services" class="nav-link text-slate-600 hover:text-emerald-600 font-medium">Услуги</a>
+                    <a href="#platforms" class="nav-link text-slate-600 hover:text-emerald-600 font-medium">Платформы</a>
+                    <a href="#process" class="nav-link text-slate-600 hover:text-emerald-600 font-medium">Процесс</a>
+                    <a href="#contact" class="nav-link text-slate-600 hover:text-emerald-600 font-medium">Контакты</a>
+                </nav>
+
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-slate-600 hover:text-emerald-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Мобильное меню -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-4 px-6 shadow-lg">
+            <div class="flex flex-col space-y-4">
+                <a href="#services" class="text-slate-600 hover:text-emerald-600 font-medium">Услуги</a>
+                <a href="#platforms" class="text-slate-600 hover:text-emerald-600 font-medium">Платформы</a>
+                <a href="#process" class="text-slate-600 hover:text-emerald-600 font-medium">Процесс</a>
+                <a href="#contact" class="text-slate-600 hover:text-emerald-600 font-medium">Контакты</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Мы создаем <span class="gradient-text">цифровые решения</span>, которые работают
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 max-w-lg">
+                        Профессиональная разработка веб-сайтов под нужды вашего бизнеса — от простых лендингов до сложных веб-приложений.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-full transition duration-300">
+                            Начать
+                        </a>
+                        <a href="#services" class="px-8 py-3 border border-emerald-600 text-emerald-600 hover:bg-emerald-50 font-medium rounded-full transition duration-300">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -top-6 -left-6 w-32 h-32 bg-emerald-100 rounded-full opacity-70"></div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-emerald-100 rounded-full opacity-70"></div>
+                        <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                            <div class="h-8 bg-emerald-100 flex items-center px-4">
+                                <div class="w-3 h-3 rounded-full bg-emerald-400 mr-2"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-400 mr-2"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                            </div>
+                            <div class="p-6">
+                                <div class="h-64 bg-gradient-to-br from-emerald-50 to-white rounded-lg flex items-center justify-center">
+                                    <div class="text-center">
+                                        <i class="fas fa-laptop-code text-6xl text-emerald-600 mb-4"></i>
+                                        <p class="text-emerald-600 font-medium">craftveb.ru</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 bg-emerald-50">
+      <div class="container mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Наши услуги</h2>
+          <p class="text-slate-600 max-w-2xl mx-auto">
+            Мы предлагаем комплексные решения в сфере веб-разработки, чтобы помочь вашему бизнесу успешно развиваться в онлайне.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+            <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
+              <i class="fas fa-paint-brush text-2xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Индивидуальный дизайн</h3>
+            <p class="text-slate-600">Дизайн сайтов, отражающий индивидуальность вашего бренда и вовлекающий аудиторию.</p>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+            <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
+              <i class="fas fa-code text-2xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Разработка</h3>
+            <p class="text-slate-600">Чистый и эффективный код, обеспечивающий стабильную работу сайта на всех устройствах.</p>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+            <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
+              <i class="fas fa-search-dollar text-2xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">SEO-оптимизация</h3>
+            <p class="text-slate-600">Встроенные SEO-решения для повышения позиций вашего сайта в поисковой выдаче.</p>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+            <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
+              <i class="fas fa-mobile-alt text-2xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Адаптивный дизайн</h3>
+            <p class="text-slate-600">Сайты, идеально отображающиеся и функционирующие на любых устройствах — от ПК до смартфонов.</p>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+            <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
+              <i class="fas fa-shopping-cart text-2xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Интернет-магазины</h3>
+            <p class="text-slate-600">Полные решения для онлайн-продаж с безопасной оплатой и управлением товарами.</p>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+            <div class="w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center mb-6">
+              <i class="fas fa-tools text-2xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Поддержка и обслуживание</h3>
+            <p class="text-slate-600">Регулярные обновления и техническая поддержка для безопасности и актуальности вашего сайта.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section id="platforms" class="py-20 px-6">
+      <div class="container mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Наши платформы</h2>
+          <p class="text-slate-600 max-w-2xl mx-auto">
+            Мы специализируемся на разработке сайтов на этих мощных платформах.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="flex flex-col items-center">
+            <div class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mb-4 platform-icon">
+              <img src="{{ url_for('static', filename='img/Tilda.png') }}" alt="Tilda" class="w-12 h-12">
+            </div>
+            <h3 class="text-lg font-semibold">Tilda</h3>
+            <p class="text-sm text-slate-600 text-center mt-1">Красивые сайты без кода</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mb-4 platform-icon">
+              <i class="fab fa-wordpress text-5xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">WordPress</h3>
+            <p class="text-sm text-slate-600 text-center mt-1">Гибкие CMS-решения</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mb-4 platform-icon">
+              <i class="fab fa-react text-5xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">React</h3>
+            <p class="text-sm text-slate-600 text-center mt-1">Современные веб-приложения</p>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mb-4 platform-icon">
+              <i class="fab fa-drupal text-5xl text-emerald-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold">Drupal</h3>
+            <p class="text-sm text-slate-600 text-center mt-1">CMS корпоративного уровня</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-20 px-6 bg-emerald-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Наш процесс</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Структурированный подход, гарантирующий успех вашего проекта.</p>
+            </div>
+
+            <div class="relative">
+                <div class="hidden lg:block absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-emerald-300 to-emerald-500"></div>
+
+                <div class="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-y-16">
+                    <!-- Шаг 1 -->
+                    <div class="lg:pr-16">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">1</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Анализ</h3>
+                                <p class="text-slate-600">Мы начинаем с изучения целей вашего бизнеса, целевой аудитории и требований проекта через подробные обсуждения.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 2 -->
+                    <div class="lg:pl-16 lg:col-start-2">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">2</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Планирование</h3>
+                                <p class="text-slate-600">Создаём детальный план проекта: структура сайта, wireframes, выбор технологий.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 3 -->
+                    <div class="lg:pr-16">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">3</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Дизайн</h3>
+                                <p class="text-slate-600">Дизайнеры создают макеты и прототипы, соответствующие вашему бренду и UX-целям.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 4 -->
+                    <div class="lg:pl-16 lg:col-start-2">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">4</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Разработка</h3>
+                                <p class="text-slate-600">Создаём сайт с чистым и эффективным кодом, соблюдая современные стандарты и лучшие практики.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 5 -->
+                    <div class="lg:pr-16">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">5</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Тестирование</h3>
+                                <p class="text-slate-600">Проводим тщательное тестирование на разных устройствах и браузерах перед запуском.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Шаг 6 -->
+                    <div class="lg:pl-16 lg:col-start-2">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">6</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">Запуск и поддержка</h3>
+                                <p class="text-slate-600">Развёртываем сайт и предоставляем постоянную поддержку, обновления и оптимизацию.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">150+</div>
+                    <p class="text-emerald-100">Завершённых проектов</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">95%</div>
+                    <p class="text-emerald-100">Удовлетворённость клиентов</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">5+</div>
+                    <p class="text-emerald-100">Лет опыта</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Отзывы наших клиентов</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Не верьте нам на слово — послушайте, что говорят довольные клиенты.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Алексей Петров</h4>
+                            <p class="text-sm text-slate-500">Генеральный директор, TechSolutions</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600">"craftveb.ru преобразили наш устаревший сайт в современную, высокоэффективную платформу, что значительно повысило количество лидов."</p>
+                    <div class="flex mt-4 text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Мария Иванова</h4>
+                            <p class="text-sm text-slate-500">Директор по маркетингу, GreenLife</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600">"Команда craftveb.ru сдала наш интернет-магазин раньше срока. Их внимание к деталям и адаптивный дизайн превзошли ожидания."</p>
+                    <div class="flex mt-4 text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-emerald-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Дмитрий Соколов</h4>
+                            <p class="text-sm text-slate-500">Основатель, EduConnect</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-600">"Работать с craftveb.ru было приятно. Они отлично поняли наши сложные требования для образовательной платформы и выдали выдающийся результат."</p>
+                    <div class="flex mt-4 text-amber-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-6 bg-emerald-600 text-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Готовы начать проект?</h2>
+            <p class="text-emerald-100 max-w-2xl mx-auto mb-8">Давайте обсудим, как мы можем помочь вам достичь бизнес-целей с помощью профессионального сайта.</p>
+            <a href="#contact" class="px-8 py-3 bg-white text-emerald-600 hover:bg-emerald-50 font-medium rounded-full transition duration-300 inline-block">
+                Получить бесплатную консультацию
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Свяжитесь с нами</h2>
+                    <p class="text-slate-600 mb-8">Есть проект или вопросы по нашим услугам? Заполните форму, и мы свяжемся с вами в течение 24 часов.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-emerald-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Напишите нам</h4>
+                                <p class="text-slate-600">info@craftveb.ru</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-emerald-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Наш офис</h4>
+                                <p class="text-slate-600">Екатеринбург, Россия</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        <div class="mb-4">
+                          {% for category, message in messages %}
+                            <div class="p-4 rounded-lg text-sm
+                                {% if category == 'success' %}
+                                  bg-emerald-100 text-emerald-800
+                                {% elif category == 'danger' %}
+                                  bg-red-100 text-red-800
+                                {% else %}
+                                  bg-gray-100 text-gray-800
+                                {% endif %}">
+                              {{ message }}
+                            </div>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('index') }}" class="bg-white rounded-xl p-8 shadow-md">
+                        <div class="mb-6">
+                          <label for="name" class="block text-slate-700 font-medium mb-2">Ваше имя</label>
+                          <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Иван Иванов" required>
+                        </div>
+
+                        <div class="mb-6">
+                          <label for="email" class="block text-slate-700 font-medium mb-2">Email</label>
+                          <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="ivan@example.com" required>
+                        </div>
+
+                        <div class="mb-6">
+                          <label for="phone" class="block text-slate-700 font-medium mb-2">Телефон</label>
+                          <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="+7 (XXX) XXX-XX-XX">
+                        </div>
+
+                        <div class="mb-6">
+                          <label for="message" class="block text-slate-700 font-medium mb-2">Сообщение</label>
+                          <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" placeholder="Опишите ваш проект..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition duration-300">
+                          Отправить сообщение
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12 px-6">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold gradient-text mb-4">craftveb.ru</h3>
+                    <p class="text-slate-400 mb-4">Профессиональная разработка сайтов для роста вашего бизнеса в интернете.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Услуги</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">Веб-дизайн</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">Разработка сайтов</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">Интернет-магазины</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">SEO-оптимизация</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">Поддержка</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Платформы</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">Tilda</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">WordPress</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">React</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-emerald-400 transition duration-300">Drupal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Контакты</h4>
+                    <ul class="space-y-2">
+                        <li class="text-slate-400">info@craftveb.ru</li>
+                        <li class="text-slate-400">Екатеринбург, Россия</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-500 mb-4 md:mb-0">© 2025 craftveb.ru. Все права защищены.</p>
+                <p class="text-red-600 text-sm font-medium">
+                    <strong>Внимание!</strong> Вся информация, размещённая на данном сайте, <br>
+                    носит исключительно ознакомительный характер и не является публичной офертой, <br>
+                    определяемой положениями статьи 437 Гражданского кодекса Российской Федерации.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" onclick="showPrivacyPopup()" class="text-emerald-600 underline">
+                        Политика конфиденциальности
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+<div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-8 md:right-auto bg-white shadow-lg border border-slate-200 rounded-lg p-4 z-50 max-w-md mx-auto hidden">
+    <p class="text-sm text-slate-700 mb-2">
+        Мы используем cookies для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с <a href="#" onclick="showPrivacyPopup()" class="text-emerald-600 underline">
+    политикой конфиденциальности
+</a>.
+    </p>
+    <button onclick="acceptCookies()" class="mt-2 bg-emerald-600 text-white text-sm px-4 py-2 rounded hover:bg-emerald-700">
+        Принять
+    </button>
+</div>
+
+<script>
+    function acceptCookies() {
+        localStorage.setItem('cookieAccepted', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!localStorage.getItem('cookieAccepted')) {
+            document.getElementById('cookie-banner').style.display = 'block';
+        }
+    });
+</script>
+<!-- Popup с политикой конфиденциальности -->
+<div id="privacyPopup" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+  <div class="bg-white rounded-lg shadow-lg p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto text-slate-800 relative">
+    <h2 class="text-2xl font-bold mb-4">Политика конфиденциальности</h2>
+    <p class="mb-4"><strong>craftveb.ru</strong> уважает вашу конфиденциальность...</p>
+    <h3 class="text-xl font-semibold mt-4 mb-2">1. Какие данные мы собираем</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Имя, email, телефон (из формы)</li>
+      <li>Cookies и действия пользователя на сайте</li>
+    </ul>
+    <h3 class="text-xl font-semibold mt-4 mb-2">2. Для чего мы их используем</h3>
+    <ul class="list-disc ml-6 mb-4">
+      <li>Для связи по запросу</li>
+      <li>Для улучшения работы сайта</li>
+    </ul>
+    <p class="text-sm text-slate-500">Полный текст политики см. на info@craftveb.ru</p>
+
+    <button onclick="closePrivacyPopup()" class="mt-6 bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700">
+      Закрыть
+    </button>
+  </div>
+    <script>
+  function showPrivacyPopup() {
+    document.getElementById('privacyPopup').classList.remove('hidden');
+  }
+
+  function closePrivacyPopup() {
+    document.getElementById('privacyPopup').classList.add('hidden');
+  }
+</script>
+</div>
+</body>
+</html>

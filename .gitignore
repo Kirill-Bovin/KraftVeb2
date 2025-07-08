@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+
+# Env & Secrets
+.env
+*.env
+.env.*
+
+# Venv
+.venv/
+venv/
+env/
+ENV/
+
+# VS Code / PyCharm / IDEs
+.vscode/
+.idea/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Logs / DB
+*.log
+*.sqlite3
+*.db
+
+# Render or deployment
+.DS_Store
+*.bak
+
+# Frontend (если есть сборка)
+node_modules/
+dist/
+*.lock
