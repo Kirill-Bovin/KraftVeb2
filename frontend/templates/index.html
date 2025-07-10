@@ -525,6 +525,12 @@
                         <button type="submit" class="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition duration-300">
                           Отправить сообщение
                         </button>
+                        <div class="flex items-center mt-3 space-x-2">
+                            <input id="privacy" type="checkbox" required class="w-4 h-4 text-emerald-600 rounded border-gray-300 focus:ring-emerald-500">
+                            <label for="privacy" class="text-gray-700 text-sm">
+                              Я согласен с <a href="{{ url_for('privacy') }}" class="text-emerald-600 hover:underline">политикой конфиденциальности</a>
+                            </label>
+                          </div>
                     </form>
                 </div>
             </div>
